@@ -411,7 +411,10 @@ code-groups minor mode - i.e. the function usually bound to C-S-j")
 (define-minor-mode code-groups-mode
   "Minor mode for grouping code hunks and auto-code."
   :lighter " code-groups"
-  :keymap code-groups-mode-keymap)
+  :keymap code-groups-mode-keymap
+  (if code-groups-mode
+      (hs-minor-mode 1)
+    (hs-minor-mode -1)))
 
 (provide 'code-groups)
 ;;; code-groups.el ends here
