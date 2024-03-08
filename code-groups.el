@@ -34,11 +34,11 @@
   ;; :group '???
   )
 
-(defvar-local cgs-forward-list-original #'forward-list
+(defvar-local cgs-forward-list-original #'forward-sexp ; #'forward-list
   "Original forward-list function used by the major mode before loading
 code-groups minor mode - i.e. the function usually bound to C-M-n")
 
-(defvar-local cgs-backward-list-original #'backward-list
+(defvar-local cgs-backward-list-original #'backward-sexp ; #'backward-list
   "Original backward-list function used by the major mode before loading
 code-groups minor mode - i.e. the function usually bound to C-M-p")
 
