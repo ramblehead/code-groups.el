@@ -105,39 +105,30 @@ code-groups minor mode - i.e. the function usually bound to C-S-j")
     cgs--block-code-group-open-token)))
 
 (defun cgs-looking-at-auto-code-group-head-or-tail ()
-  (cond ((cgs--looking-at-group-head
-          cgs--auto-code-group-open-token)
+  (cond ((cgs--looking-at-group-head cgs--auto-code-group-open-token)
          cgs--auto-code-group-open-token)
-        ((cgs--looking-at-group-head
-          cgs--auto-code-group-close-token)
+        ((cgs--looking-at-group-head cgs--auto-code-group-close-token)
          cgs--auto-code-group-close-token)))
 
 (defun cgs--looking-at-any-group-head ()
-  (cond ((cgs--looking-at-group-head
-          cgs--doxygen-group-open-token)
+  (cond ((cgs--looking-at-group-head cgs--doxygen-group-open-token)
          cgs--doxygen-group-open-token)
-        ((cgs--looking-at-group-head
-          cgs--auto-code-group-open-token)
+        ((cgs--looking-at-group-head cgs--auto-code-group-open-token)
          cgs--auto-code-group-open-token)
-        ((cgs--looking-at-group-head
-          cgs--custom-code-group-open-token)
+        ((cgs--looking-at-group-head cgs--custom-code-group-open-token)
          cgs--custom-code-group-open-token)
-        ((cgs--looking-at-group-head
-          cgs--block-code-group-open-token)
+        ((cgs--looking-at-group-head cgs--block-code-group-open-token)
          cgs--block-code-group-open-token)))
 
 (defun cgs--looking-at-any-group-tail ()
-  (cond ((cgs--looking-at-group-tail
-          cgs--doxygen-group-close-token)
+  (cond ((cgs--looking-at-group-tail cgs--doxygen-group-close-token)
          cgs--doxygen-group-close-token)
-        ((cgs--looking-at-group-tail
-          cgs--auto-code-group-close-token)
+        ((cgs--looking-at-group-tail cgs--auto-code-group-close-token)
          cgs--auto-code-group-close-token)
-        ((cgs--looking-at-group-tail
-          cgs--custom-code-group-close-token)
+        ((cgs--looking-at-group-tail cgs--custom-code-group-close-token)
          cgs--custom-code-group-close-token)
-        ((cgs--looking-at-group-tail
-          cgs--block-code-group-close-token)
+        ((cgs--looking-at-group-tail cgs--block-code-group-close-token)
+
          cgs--block-code-group-close-token)))
 
 (defun cgs--search-backward-group-balanced-head ()
