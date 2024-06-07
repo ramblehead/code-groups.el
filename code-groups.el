@@ -46,9 +46,25 @@ code-groups minor mode - i.e. the function usually bound to C-M-p")
   "Original hs-toggle-hiding function used by the major mode before loading
 code-groups minor mode - i.e. the function usually bound to C-S-j")
 
+;;; /b/$ Possible other options?
+;;; /b/{
+
+;; (defvar cgs--auto-code-group-param-token "auto-$")
+;; (defvar cgs--auto-code-group-open-token "<auto>")
+;; (defvar cgs--auto-code-group-close-token "</auto>")
+
+;; (defvar cgs--custom-code-group-open-token "<custom>")
+;; (defvar cgs--custom-code-group-close-token "</custom>")
+
+;;; /b/}
+
 (defvar cgs--doxygen-group-open-token "///@{")
 (defvar cgs--doxygen-group-close-token "///@}")
 
+(defvar cgs--xml-block-group-open-token "<code-group>")
+(defvar cgs--xml-block-group-close-token "</code-group>")
+
+(defvar cgs--auto-code-group-param-token "/a/$")
 (defvar cgs--auto-code-group-open-token "/a/{")
 (defvar cgs--auto-code-group-close-token "/a/}")
 
@@ -57,8 +73,6 @@ code-groups minor mode - i.e. the function usually bound to C-S-j")
 
 (defvar cgs--custom-code-group-open-token "/c/{")
 (defvar cgs--custom-code-group-close-token "/c/}")
-
-(defvar cgs--auto-code-group-param-token "/a/$")
 
 (defun cgs--group-head-regexp (open-token)
   (concat "^.*" open-token ".*$"))
@@ -91,14 +105,22 @@ code-groups minor mode - i.e. the function usually bound to C-S-j")
     cgs--doxygen-group-close-token)
    ((string= cgs--doxygen-group-close-token token)
     cgs--doxygen-group-open-token)
+
+   ((string= cgs--xml-block-group-open-token token)
+    cgs--xml-block-group-close-token)
+   ((string= cgs--xml-block-group-close-token token)
+    cgs--xml-block-group-open-token)
+
    ((string= cgs--auto-code-group-open-token token)
     cgs--auto-code-group-close-token)
    ((string= cgs--auto-code-group-close-token token)
     cgs--auto-code-group-open-token)
+
    ((string= cgs--custom-code-group-open-token token)
     cgs--custom-code-group-close-token)
    ((string= cgs--custom-code-group-close-token token)
     cgs--custom-code-group-open-token)
+
    ((string= cgs--block-code-group-open-token token)
     cgs--block-code-group-close-token)
    ((string= cgs--block-code-group-close-token token)
@@ -113,6 +135,8 @@ code-groups minor mode - i.e. the function usually bound to C-S-j")
 (defun cgs--looking-at-any-group-head ()
   (cond ((cgs--looking-at-group-head cgs--doxygen-group-open-token)
          cgs--doxygen-group-open-token)
+        ((cgs--looking-at-group-head cgs--xml-block-group-open-token)
+         cgs--xml-block-group-open-token)
         ((cgs--looking-at-group-head cgs--auto-code-group-open-token)
          cgs--auto-code-group-open-token)
         ((cgs--looking-at-group-head cgs--custom-code-group-open-token)
@@ -123,6 +147,8 @@ code-groups minor mode - i.e. the function usually bound to C-S-j")
 (defun cgs--looking-at-any-group-tail ()
   (cond ((cgs--looking-at-group-tail cgs--doxygen-group-close-token)
          cgs--doxygen-group-close-token)
+        ((cgs--looking-at-group-tail cgs--xml-block-group-close-token)
+         cgs--xml-block-group-close-token)
         ((cgs--looking-at-group-tail cgs--auto-code-group-close-token)
          cgs--auto-code-group-close-token)
         ((cgs--looking-at-group-tail cgs--custom-code-group-close-token)
