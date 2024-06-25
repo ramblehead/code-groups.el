@@ -31,8 +31,7 @@
 (defgroup code-groups nil
   "Code Groups mode."
   :prefix "cgs-"
-  ;; :group '???
-  )
+  :group 'languages)
 
 (defvar-local cgs-forward-list-original #'forward-sexp ; #'forward-list
   "Original forward-list function used by the major mode before loading
@@ -61,8 +60,8 @@ code-groups minor mode - i.e. the function usually bound to C-S-j")
 (defvar cgs--doxygen-group-open-token "///@{")
 (defvar cgs--doxygen-group-close-token "///@}")
 
-(defvar cgs--xml-block-group-open-token "<code-group>")
-(defvar cgs--xml-block-group-close-token "</code-group>")
+(defvar cgs--xml-block-group-open-token "<code-block>")
+(defvar cgs--xml-block-group-close-token "</code-block>")
 
 (defvar cgs--auto-code-group-param-token "/a/$")
 (defvar cgs--auto-code-group-open-token "/a/{")
