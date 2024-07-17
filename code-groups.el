@@ -57,6 +57,8 @@ code-groups minor mode - i.e. the function usually bound to C-S-j")
 
 ;;; /b/}
 
+(defvar cgs--auto-code "///@{")
+
 (defvar cgs--doxygen-group-open-token "///@{")
 (defvar cgs--doxygen-group-close-token "///@}")
 
@@ -279,11 +281,11 @@ code-groups minor mode - i.e. the function usually bound to C-S-j")
       (goto-char start)
       (delete-region start end))))
 
-(defun cgs--get-auto-code-main-path (file-name)
+(defun cgs--get-auto-code-path (file-name)
   (let* ((buffer-dir (file-name-directory file-name))
-         (src-tree-root (locate-dominating-file buffer-dir "auto-code/main")))
+         (src-tree-root (locate-dominating-file buffer-dir "auto-code")))
     (when src-tree-root
-      (expand-file-name (concat src-tree-root "auto-code/main")))))
+      (expand-file-name (concat src-tree-root "auto-code")))))
 
 (defun cgs--generate-auto-code
     (generator-name
@@ -291,16 +293,16 @@ code-groups minor mode - i.e. the function usually bound to C-S-j")
      template-name
      auto-codded-file-path
      indentation-str)
-  (let ((auto-code-main-path
-         (cgs--get-auto-code-main-path auto-codded-file-path))
+  (let ((auto-code-path
+         (cgs--get-auto-code-path auto-codded-file-path))
         auto-code-command lines last-line)
-    (unless auto-code-main-path (error "auto-code/main path not found." ))
+    (unless auto-code-path (error "auto-code path not found." ))
     (setq auto-code-command (concat (file-name-as-directory
-                                     auto-code-main-path)
+                                     auto-code-path)
                                     generator-name))
     (unless (file-exists-p auto-code-command)
       (error (concat
-              "auto-code/main/" generator-name " generator does not exist.")))
+              "auto-code/" generator-name " generator does not exist.")))
     (setq auto-code-command (string-join (list auto-code-command
                                                model-name
                                                template-name
