@@ -419,8 +419,7 @@ code-groups minor mode - i.e. the function usually bound to C-S-j")
 
 (defvar code-groups-mode-keymap
   (let ((map (make-sparse-keymap)))
-    (when (display-graphic-p)
-      (define-key map (kbd "C-S-j") #'cgs-hs-toggle-hiding))
+    (define-key map (kbd "C-S-j") #'cgs-hs-toggle-hiding)
     (define-key map (kbd "C-M-j") #'cgs-hs-toggle-hiding)
     (define-key map (kbd "C-M-n") #'cgs-forward-list)
     (define-key map (kbd "C-M-p") #'cgs-backward-list)
